@@ -99,12 +99,12 @@
               >
             </p>
 
-            <button
-              onclick="buyTicket()"
+            <a
+              href="#paribahan"
               class="text-[#030712] px-5 py-3 rounded-xl bg-primary font-bold md:text-xl"
             >
               Buy Tickets
-            </button>
+            </a>
           </div>
 
           <div
@@ -233,8 +233,9 @@
       <!-- Best offers for you end -->
 
       <!-- P.H Paribahan start -->
-      <!-- style="background-image: url('image/Rectangle\ 11.png')" -->
+
       <section
+        id="paribahan"
         class="my-20 pb-14 bg-gray-50 lg:border-t-4 border-t-2 border-primary lg:rounded-t-[8%] md:rounded-t-[10%]"
       >
         <div class="flex flex-col text-center justify-center">
@@ -275,7 +276,8 @@
                   <button
                     class="flex items-center gap-3 text-lg font-medium bg-[#1DD1001A] w-48 px-2 h-12 rounded-xl text-primary"
                   >
-                    <img src="image/seat-green.png" alt="" /> 8 Seats left
+                    <img src="image/seat-green.png" alt="" />
+                    <span id="remaining-count">8 Seats left</span>
                   </button>
                 </div>
               </div>
@@ -365,15 +367,56 @@
                   class="grid grid-cols-5 text-lg font-medium items-center gap-5 my-5"
                 >
                   <p class="text-[#03071280]">A</p>
-                  <button class="seat-button btn text-[#03071280]">A1</button>
-                  <button class="seat-button btn text-[#03071280]">A2</button>
-                  <button class="seat-button btn text-[#03071280]">A3</button>
-                  <button class="seat-button btn text-[#03071280]">A4</button>
+
+                  <button
+                    onclick="toggleButton(this)"
+                    class="seat-button btn text-[#03071280]"
+                  >
+                    A1
+                  </button>
+                  <button
+                    onclick="toggleButton(this)"
+                    class="seat-button btn text-[#03071280]"
+                  >
+                    A2
+                  </button>
+                  <button
+                    onclick="toggleButton(this)"
+                    class="seat-button btn text-[#03071280]"
+                  >
+                    A3
+                  </button>
+                  <button
+                    onclick="toggleButton(this)"
+                    class="seat-button btn text-[#03071280]"
+                  >
+                    A4
+                  </button>
                   <p class="text-[#03071280]">B</p>
-                  <button class="seat-button btn text-[#03071280]">B1</button>
-                  <button class="seat-button btn text-[#03071280]">B2</button>
-                  <button class="seat-button btn text-[#03071280]">B3</button>
-                  <button class="seat-button btn text-[#03071280]">B4</button>
+                  <button
+                    onclick="toggleButton(this)"
+                    class="seat-button btn text-[#03071280]"
+                  >
+                    B1
+                  </button>
+                  <button
+                    onclick="toggleButton(this)"
+                    class="seat-button btn text-[#03071280]"
+                  >
+                    B2
+                  </button>
+                  <button
+                    onclick="toggleButton(this)"
+                    class="seat-button btn text-[#03071280]"
+                  >
+                    B3
+                  </button>
+                  <button
+                    onclick="toggleButton(this)"
+                    class="seat-button btn text-[#03071280]"
+                  >
+                    B4
+                  </button>
                 </div>
               </div>
               <div
@@ -389,8 +432,9 @@
                       <h3 class="text-base font-medium">
                         <span class=""> Seat</span>
                         <span
+                          id="selected-count"
                           class="bg-primary px-2.5 py-[0.1px] text-white rounded-lg"
-                          >2</span
+                          >0</span
                         >
                       </h3>
                     </div>
@@ -399,14 +443,14 @@
                   </div>
 
                   <div class="border-b border-dashed my-5"></div>
-                  <div></div>
+                  <div id="ticket_details"></div>
                 </div>
                 <div class="border-b border-dashed"></div>
 
                 <div class="px-5 py-2 flex flex-col gap-3.5">
                   <div class="flex justify-between">
                     <h2 class="text-base font-medium">Total Price</h2>
-                    <h2 class="text-base font-medium">BDT 0</h2>
+                    <h2 id="total_price" class="text-base font-medium"></h2>
                   </div>
                   <div
                     class="flex lg:flex-row flex-col justify-between lg:gap-0 gap-5"
@@ -471,6 +515,29 @@
         </div>
       </div>
     </footer>
+    <script>
+      let selectedCount = 0;
+      function toggleButton(button) {
+        if (button.classList.contains("selected")) {
+          button.classList.remove("selected");
+          selectedCount--;
+        } else {
+          if (selectedCount < 4) {
+            button.classList.add("selected");
+            selectedCount++;
+          } else {
+            alert("You can buy a maximum of 4 tickets, not more than that");
+          }
+        }
+        updateCounts();
+      }
+
+      function updateCounts() {
+        document.getElementById("selected-count").textContent = selectedCount;
+        document.getElementById("remaining-count").textContent =
+          8 - selectedCount;
+      }
+    </script>
 
     <script src="index.js"></script>
   </body>
